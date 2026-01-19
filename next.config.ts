@@ -6,10 +6,7 @@ const nextConfig: NextConfig = {
     // TypeScript වැරදි තිබුනත් Deploy වෙනවා
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // ESLint වැරදි තිබුනත් Deploy වෙනවා
-    ignoreDuringBuilds: true,
-  },
+  
 };
 
 export default nextConfig;
