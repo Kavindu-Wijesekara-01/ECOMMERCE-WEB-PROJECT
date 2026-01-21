@@ -33,11 +33,11 @@ export default function SearchBar() {
 
         <input
           type="text"
-          placeholder="Search for products (ex: ASUS Monitor)..."
-          className="w-full pl-14 pr-32 py-4 rounded-2xl border border-gray-200 bg-white text-slate-800 
-                     shadow-xl shadow-slate-700/10 
+          placeholder="Search for products "
+          className="w-full pl-14 pr-32 py-3 rounded-3xl border border-gray-200 bg-white text-slate-800 
+                     shadow-xl shadow-slate-700/10 text-md
                      focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent 
-                     transition-all duration-300 placeholder:text-gray-400 text-lg"
+                     transition-all duration-300 placeholder:text-gray-400 text-md"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -45,7 +45,7 @@ export default function SearchBar() {
         {/* Search Button */}
         <button
           type="submit"
-          className="absolute right-2 top-2 bottom-2 bg-orange-600 text-white px-6 rounded-xl font-bold hover:bg-orange-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+          className="absolute right-2 top-2 bottom-2 bg-orange-600 text-white px-6 rounded-2xl font-bold hover:bg-orange-700 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
         >
           Search
         </button>

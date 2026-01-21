@@ -32,7 +32,7 @@ export default function LoginPage() {
 
       if (result?.error) {
         // Login වැරදි නම් error එක පෙන්නනවා
-        setError("Email හෝ Password වැරදියි!");
+        setError("Incorrect email or password!");
         setLoading(false);
       } else {
         // 2. Login හරි නම් Home page එකට යවනවා
@@ -40,7 +40,7 @@ export default function LoginPage() {
         router.refresh(); // Navbar එකේ වෙනස්කම් පෙන්නන්න page එක refresh කරනවා
       }
     } catch (err) {
-      setError("Login වීමේ දෝෂයක්. නැවත උත්සාහ කරන්න.");
+      setError("Login error, try again.");
       setLoading(false);
     }
   };
@@ -48,8 +48,8 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-        <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
-          Admin Login
+        <h2 className="mb-6 text-center text-2xl font-bold text-slate-800">
+          Login Here
         </h2>
 
         {/* Error එකක් ආවොත් රතු පාටින් පෙන්නන කොටස */}
@@ -70,7 +70,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded border px-3 py-2 text-gray-700 focus:border-blue-500 focus:outline-none"
-              placeholder="admin@dkcreations.com"
+              placeholder="admin@pcsolution.com"
               required
             />
           </div>

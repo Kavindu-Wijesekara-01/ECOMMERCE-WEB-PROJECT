@@ -4,35 +4,35 @@ const PROMO_CARDS = [
   {
     id: 1,
     title: "Summer Sale! Up to 50% Off",
-    image: "https://www.tulipcom.lk/public/dbimages/product/1726832388_pdt_1.jpg", 
+    image: "https://cdn.sanity.io/images/yqd1zell/production/a299cdf14ca121096bf11cb14038f246ea3dc0a5-500x500.png", 
     bgColor: "bg-orange-50", // Changed to match theme slightly
     link: "/?category=Headsets"
   },
   {
     id: 2,
     title: "New Keyboards Stock Arrived",
-    image: "https://www.tulipcom.lk/public/dbimages/product/1729578834_pdt_1.jpg",
+    image: "https://billing.mskcomputers.lk/assets/uploads/e079dcab66f5e3269a1afe05d1b7d513.png",
     bgColor: "bg-blue-50",
     link: "/?category=Keyboards"
   },
   {
     id: 3,
     title: "Profectional Style",
-    image: "https://www.tulipcom.lk/public/dbimages/product/1726828807_pdt_1.jpg",
+    image: "https://billing.mskcomputers.lk/assets/uploads/cac77ed95313cbb9f22e7917f484abda.png",
     bgColor: "bg-purple-50",
     link: "/?category=Mouse"
   },
   {
     id: 4,
     title: "Best Deals on Monitors",
-    image: "https://www.tulipcom.lk/public/dbimages/product/1639843457_pdt_1.jpg",
+    image: "https://www.nanotek.lk/storage/products/832/CXF7wbgFYNgrHJyKnFei5ngxcon294UlMTp0wHBP.webp",
     bgColor: "bg-yellow-50",
     link: "/?category=Monitors"
   },
   {
     id: 5,
     title: "Upgrade Your Processors",
-    image: "https://www.tulipcom.lk/public/dbimages/product/1755259117_pdt_1.jpg",
+    image: "https://www.nanotek.lk/storage/products/1370/Y2pKaxSZJQY8euxNEP9WiKdKyMKqMIh8r1fb0FoV.webp",
     bgColor: "bg-green-50",
     link: "/?category=Processors"
   },
