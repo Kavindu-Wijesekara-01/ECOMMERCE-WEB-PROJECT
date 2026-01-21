@@ -1,4 +1,4 @@
-import connectToDatabase from "@/lib/db";
+import {connectToDatabase} from "@/lib/db";
 import Product from "@/models/Product";
 import { updateProduct } from "@/app/actions/updateProduct";
 import { notFound } from "next/navigation";

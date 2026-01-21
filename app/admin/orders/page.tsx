@@ -1,4 +1,4 @@
-import connectToDatabase from "@/lib/db";
+import {connectToDatabase} from "@/lib/db";
 import Order from "@/models/Order";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";

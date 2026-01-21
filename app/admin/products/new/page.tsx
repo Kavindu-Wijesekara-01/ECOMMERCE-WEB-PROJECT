@@ -1,5 +1,5 @@
 import { addProduct } from "@/app/actions/addProduct";
-import connectToDatabase from "@/lib/db";
+import {connectToDatabase} from "@/lib/db";
 import Product from "@/models/Product";
 
 export default async function AddProductPage() {
