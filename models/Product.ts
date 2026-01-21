@@ -8,7 +8,7 @@ const ProductSchema = new Schema(
     imageUrl: { type: String, required: true },
     category: { type: String, required: true }, // උදා: Monitors, VGA Cards
     brand: { type: String, required: true },    // උදා: ASUS, MSI, Logitech (අලුතින් දැම්මා)
-    stock: { type: Number, default: 0 },
+    stock: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
 );

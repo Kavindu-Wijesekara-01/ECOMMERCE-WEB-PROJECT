@@ -29,7 +29,7 @@ export default function CartPage() {
 
         <div className="p-6">
           {cart.map((item) => (
-            <div key={item.id} className="flex items-center justify-between border-b py-4 last:border-0">
+            <div key={item._id} className="flex items-center justify-between border-b py-4 last:border-0">
               <div className="flex items-center gap-4">
                 <img src={item.imageUrl} alt={item.title} className="w-16 h-16 object-cover rounded" />
                 <div>
@@ -40,7 +40,7 @@ export default function CartPage() {
               <div className="text-right">
                 <p className="font-bold">Rs. {(item.price * item.quantity).toLocaleString()}</p>
                 <button
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item._id)}
                   className="text-red-500 text-sm hover:underline mt-1"
                 >
                   Remove

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import connectToDatabase from "@/lib/db";
+import { connectToDatabase } from "@/lib/db";
 import Product from "@/models/Product";
 
 // 1. GET Request

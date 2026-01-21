@@ -1,6 +1,6 @@
 "use server";
 
-import connectToDatabase from "@/lib/db";
+import {connectToDatabase} from "@/lib/db";
 import Review from "@/models/Review";
 import { auth } from "@/auth"; // ඔයාගේ auth path එක check කරන්න
 import { revalidatePath } from "next/cache";

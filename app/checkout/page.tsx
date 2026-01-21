@@ -4,28 +4,36 @@ import { useCart } from "../context/CartContext";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import toast from "react-hot-toast"; // 👇 Toast Import කළා
+import toast from "react-hot-toast";
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useCart();
-  const { data: session } = useSession(); // Log වුන කෙනාගේ විස්තර
+  const { data: session } = useSession();
   const router = useRouter();
   
   const [loading, setLoading] = useState(false);
+  
+  // 1. Shipping Details State (මේවා Backend එකට යනවා)
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     address: "",
   });
 
-  // මුළු එකතුව හදාගන්නවා
+  // 2. Fake Payment State (මේවා Backend එකට යන්නේ නෑ - නිකන් Type කරන්න විතරයි)
+  const [paymentData, setPaymentData] = useState({
+    cardNumber: "",
+    expiry: "",
+    cvc: "",
+    cardName: ""
+  });
+
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // 1. Loading Message එක පෙන්නනවා
     const loadingToast = toast.loading("Processing your order...");
 
     try {
@@ -38,20 +46,18 @@ export default function CheckoutPage() {
           address: formData.address,
           cart: cart,
           total: total,
-          userEmail: session?.user?.email, // Email එක යවනවා
+          userEmail: session?.user?.email,
+          // Payment details මෙතන යවන්නේ නෑ
         }),
       });
 
-      // Loading එක අයින් කරනවා
       toast.dismiss(loadingToast);
 
       if (response.ok) {
-        // 2. Success Message එක
         toast.success("Order Placed Successfully! 🎉");
         clearCart();
-        router.push("/my-orders"); // My Orders පිටුවට යවනවා
+        router.push("/my-orders");
       } else {
-        // Error Message එක
         toast.error("Something went wrong. Please try again.");
       }
     } catch (error) {
@@ -86,7 +92,7 @@ export default function CheckoutPage() {
           <h3 className="font-bold text-gray-800 mb-4 text-lg">Order Summary</h3>
           <ul className="space-y-2 mb-4">
             {cart.map((item) => (
-              <li key={item.id} className="flex justify-between text-sm text-gray-600">
+              <li key={item._id} className="flex justify-between text-sm text-gray-600">
                 <span>{item.title} (x{item.quantity})</span>
                 <span className="font-medium">Rs. {(item.price * item.quantity).toLocaleString()}</span>
               </li>
@@ -100,6 +106,8 @@ export default function CheckoutPage() {
 
         {/* Checkout Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
+          
+          {/* --- Shipping Details Section --- */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
             <input
@@ -113,7 +121,7 @@ export default function CheckoutPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
+            <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number(Whatsapp)</label>
             <input
               required
               type="tel"
@@ -136,6 +144,64 @@ export default function CheckoutPage() {
             ></textarea>
           </div>
 
+          {/* --- New Payment Details Section (Fake Form) --- */}
+          <div className="pt-6 mt-6 border-t border-gray-200">
+            <h3 className="font-bold text-gray-800 mb-4 text-lg flex items-center justify-between">
+              Payment Details
+              <div className="flex gap-2">
+                 <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500 border">VISA</span>
+                 <span className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500 border">Master</span>
+              </div>
+            </h3>
+            
+            <div className="space-y-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+               <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Card Number</label>
+                  <input 
+                    type="text" 
+                    placeholder="0000 0000 0000 0000" 
+                    className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                    value={paymentData.cardNumber}
+                    onChange={(e) => setPaymentData({...paymentData, cardNumber: e.target.value})}
+                  />
+               </div>
+               
+               <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Expiry Date</label>
+                    <input 
+                      type="text" 
+                      placeholder="MM/YY" 
+                      className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                      value={paymentData.expiry}
+                      onChange={(e) => setPaymentData({...paymentData, expiry: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-500 uppercase mb-1">CVC / CVV</label>
+                    <input 
+                      type="text" 
+                      placeholder="123" 
+                      className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                      value={paymentData.cvc}
+                      onChange={(e) => setPaymentData({...paymentData, cvc: e.target.value})}
+                    />
+                  </div>
+               </div>
+
+               <div>
+                  <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Cardholder Name</label>
+                  <input 
+                    type="text" 
+                    placeholder="NAME ON CARD" 
+                    className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white uppercase"
+                    value={paymentData.cardName}
+                    onChange={(e) => setPaymentData({...paymentData, cardName: e.target.value})}
+                  />
+               </div>
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -145,7 +211,7 @@ export default function CheckoutPage() {
               <span>Processing...</span>
             ) : (
               <>
-                <span>Confirm Order (COD)</span>
+                <span>Confirm & Pay</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>

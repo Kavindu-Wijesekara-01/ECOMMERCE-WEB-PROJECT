@@ -1,4 +1,4 @@
-import connectToDatabase from "@/lib/db";
+import { connectToDatabase } from "@/lib/db";
 import Product from "@/models/Product";
 import Link from "next/link";
 import SearchBar from "./components/SearchBar";

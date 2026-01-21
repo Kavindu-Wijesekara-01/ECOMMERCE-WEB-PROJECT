@@ -1,6 +1,6 @@
 "use server";
 
-import connectToDatabase from "@/lib/db";
+import {connectToDatabase} from "@/lib/db";
 import Order from "@/models/Order";
 import { revalidatePath } from "next/cache";
 
