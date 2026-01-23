@@ -1,51 +1,41 @@
-# 💻 PC Solution - Next.js E-commerce Platform
+# 💻 PC Solution - Advanced E-commerce Platform
 
-![Project Banner](public/banner.png)
-> *Note: Please add a screenshot of your website named `banner.png` to the `public` folder.*
+![Project Banner](https://media.licdn.com/dms/image/v2/D5622AQHDc1Yv4Kspaw/feedshare-shrink_2048_1536/B56ZvUlkg8IsAk-/0/1768798177578?e=1770854400&v=beta&t=YI-GTyrB9cl8g3R36HkXksW64530GdjGpIslAHBfW8E)
 
-A modern, full-stack e-commerce application built with **Next.js 16 (App Router)**, **MongoDB**, and **Tailwind CSS**. Designed for computer accessories and tech products, featuring automated stock management, user authentication, and a dynamic shopping cart.
+A fully functional, full-stack e-commerce application built with **Next.js 16 (App Router)**, **MongoDB**, and **Tailwind CSS**. This platform is engineered with advanced stock management logic, interactive UI components, and a secure admin dashboard.
 
-## 🚀 Key Features
+## 🚀 Advanced Features
 
-### 🛒 User Experience
-* **Product Browsing:** Filter products by categories (Keyboards, Mouse, Headsets, etc.) with search functionality.
-* **Smart Cart System:** Real-time cart updates using React Context API.
-* **Interactive Reviews:** 5-star rating system with hover effects and user comments.
-* **Related Products:** Automatically suggests similar items on product pages.
+### 🛒 Smart Inventory & Stock Management
+* **Real-time Stock Deduction:** Automatically reduces product stock in the database immediately after a confirmed order.
+* **"Out of Stock" Intelligence:** * Automatically disables "Add to Cart" buttons for 0 stock items.
+    * Visual indicators: Products appear in **Grayscale** with a "Sold Out" badge when unavailable.
+* **Inventory Protection:** Prevents users from ordering more items than available in the inventory.
 
-### 💳 Checkout & Orders
-* **Seamless Checkout:** User-friendly address form with a summary view.
-* **Stock Management:** **Automated stock reduction** upon order placement (Prevents ordering out-of-stock items).
-* **Order History:** Users can track their past orders and status.
+### ⭐ Interactive User Experience (UI/UX)
+* **Dynamic Star Rating System:** Custom-built 5-star rating input with real-time **hover & click effects** (Orange/Gray logic).
+* **Smart Related Products:** Algorithms that automatically suggest similar products from the same category (excluding the currently viewed item).
+* **Responsive Marquee:** Auto-scrolling promo banners for offers and new arrivals.
+* **Toast Notifications:** Beautiful popup notifications for cart actions and order success (using `react-hot-toast`).
 
-### 🛡️ Admin & Security
-* **Secure Authentication:** Powered by **NextAuth.js** (Credentials Provider).
-* **Admin Dashboard:** Manage products (Add/Edit/Delete) and view customer orders.
-* **Data Validation:** Robust form validation and error handling.
+### 💳 Seamless Checkout Process
+* **Optimized Checkout Flow:** Single-page checkout with delivery details and order summary.
+* **Visual Payment Form:** Professional UI for credit card details entry (Front-end simulation).
+* **Order Tracking:** Users can view their full order history with status updates.
+
+### 🛡️ Admin Power & Security
+* **Secure Authentication:** Powered by **NextAuth.js** with secure session management.
+* **Admin Dashboard:** * Full **CRUD** capabilities (Create, Read, Update, Delete) for Products.
+    * View all customer orders and details.
+* **Protected Routes:** Middleware to prevent unauthorized access to Admin pages.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Frontend:** [Next.js 14](https://nextjs.org/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
-* **Backend:** Next.js API Routes (Serverless Functions)
-* **Database:** [MongoDB Atlas](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/)
-* **Authentication:** [NextAuth.js](https://next-auth.js.org/)
-* **Notifications:** React Hot Toast
+* **Frontend:** [Next.js 16](https://nextjs.org/) (App Router), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)
+* **Backend:** Next.js Server Actions & API Routes
+* **Database:** [MongoDB Atlas](https://www.mongodb.com/) & [Mongoose ODM](https://mongoosejs.com/)
+* **Authentication:** [NextAuth.js v5](https://next-auth.js.org/)
+* **State Management:** React Context API (Cart)
 
----
-
-## ⚙️ Environment Variables
-
-To run this project locally, create a `.env` file in the root directory and add the following variables:
-
-```env
-# Database Connection
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/pcsolution_db
-
-# NextAuth Configuration
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=put_a_long_random_string_here
-
-# Admin Access (Optional)
-ADMIN_SECRET=ADMIN_POWER_123
