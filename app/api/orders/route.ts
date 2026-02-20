@@ -2,9 +2,27 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db"; // 🔥 1. වරහන් { } දැම්මා
 import Order from "@/models/Order";
 import Product from "@/models/Product";
+import rateLimit from "@/lib/rateLimit"; // 🛡️ 3 වැනි ලොක් එක සඳහා අලුතෙන් එකතු කළා
 
 export async function POST(req: Request) {
   try {
+    // ---------------------------------------------------------
+    // 🛡️ SECURITY LOCK 3: RATE LIMITING (ස්පෑම් Orders නැවැත්වීම)
+    // ---------------------------------------------------------
+    const ip = req.headers.get("x-forwarded-for") || "unknown";
+    
+    // නීතිය: එක IP එකකින් විනාඩියකට (60000ms) දාන්න පුළුවන් Orders 3යි!
+    const isAllowed = rateLimit(ip, 3, 60000);
+
+    if (!isAllowed) {
+      console.warn(`🛑 Rate limit exceeded for IP: ${ip}`);
+      return NextResponse.json(
+        { error: "Too many orders. Please try again after a minute. 🛑" },
+        { status: 429 } // 429: Too Many Requests
+      );
+    }
+    // ---------------------------------------------------------
+
     const body = await req.json();
     const { customerName, phone, address, cart, total, userEmail } = body;
 
